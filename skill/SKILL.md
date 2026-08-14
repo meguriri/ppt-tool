@@ -60,7 +60,7 @@ python3 -m http.server 8000        # 打开 http://127.0.0.1:8000/
 ```
 
 - 翻页：← → / 空格；全屏：F；导出：Cmd/Ctrl+P → 另存为 PDF。
-- 根 html 通过探测 `N.html` 是否存在发现页面：http 下用 fetch HEAD，file:// 下用隐藏 iframe 探测。
+- 根 html 通过探测 `N.html` 是否存在发现页面：http 下用 fetch HEAD，file:// 下用隐藏 `<object>` 探测（Chrome 已验证；其他浏览器建议用 http 打开）。
 
 ## 注意事项
 

@@ -60,6 +60,6 @@ python3 -m http.server 8000
 
 ## 注意
 
-- 根 html 通过探测 `1.html`、`2.html`… 是否存在来发现页面，所以页号必须连续从 1 开始；
+- 根 html 通过探测 `1.html`、`2.html`… 是否存在来发现页面（http 下用 fetch，file:// 下用 `<object>`，Chrome 已验证），所以页号必须连续从 1 开始；
 - 公式页（MathJax CDN）和嵌入外部服务的页面（如 localhost 前端）在别人电脑上可能打不开，交付前确认；
 - `ppt/`（以及旧的 `ppts/`）已被 `.gitignore` 忽略，生成的内容不入库。

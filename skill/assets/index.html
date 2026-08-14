@@ -62,15 +62,18 @@
         .then(function (r) { return r.ok; })
         .catch(function () { return false; });
     }
+    // file://: iframe 对不存在的文件也会触发 load，无法区分；
+    // 用 <object> 探测：存在的文件触发 load，缺失的文件触发 error（Chrome 已验证）。
     return new Promise(function (resolve) {
-      var f = document.createElement('iframe');
-      f.style.cssText = 'position:absolute;left:-10000px;width:1280px;height:720px;border:0';
-      f.src = n + '.html';
+      var o = document.createElement('object');
+      o.type = 'text/html';
+      o.data = n + '.html';
+      o.style.cssText = 'position:absolute;left:-10000px;width:50px;height:50px;visibility:hidden';
       var done = false;
-      var fin = function (ok) { if (done) return; done = true; if (f.parentNode) f.parentNode.removeChild(f); resolve(ok); };
-      f.onload = function () { fin(true); };
-      f.onerror = function () { fin(false); };
-      document.body.appendChild(f);
+      var fin = function (ok) { if (done) return; done = true; if (o.parentNode) o.parentNode.removeChild(o); resolve(ok); };
+      o.onload = function () { fin(true); };
+      o.onerror = function () { fin(false); };
+      document.body.appendChild(o);
       setTimeout(function () { fin(false); }, 2500);
     });
   }
@@ -97,7 +100,7 @@
       else if (pages.length > 0) break;
     }
     if (pages.length === 0) {
-      deck.innerHTML = '<div style="color:#8b949e;font-size:24px;text-align:center;padding-top:300px">未找到编号页面（1.html, 2.html, ...）</div>';
+      deck.innerHTML = '<div style="color:#8b949e;font-size:24px;text-align:center;padding-top:280px;line-height:1.8">未找到编号页面（1.html, 2.html, ...）<br><span style="font-size:16px">file:// 下请用 Chrome 打开；若仍失败，请通过 http 服务打开（python3 -m http.server）</span></div>';
       return;
     }
     pages.forEach(function (n) {
