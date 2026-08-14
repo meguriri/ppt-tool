@@ -1,0 +1,35 @@
+/* 默认皮肤：白底黑字、简洁。页面只写语义类，外观全部由这里控制。 */
+html, body {
+  margin: 0; width: 100%; height: 100%;
+  background: #fff; color: #111; overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+/* 页面容器：固定 1280×720 */
+.page {
+  box-sizing: border-box; width: 1280px; height: 720px;
+  padding: 50px 70px; display: flex; flex-direction: column;
+}
+
+/* 封面页：白底黑字、居中、只放标题（最多一行副标题） */
+.cover { align-items: center; justify-content: center; text-align: center; }
+.cover h1 { font-size: 56px; font-weight: 600; margin: 0; letter-spacing: 2px; color: #111; }
+.cover .subtitle { font-size: 24px; color: #555; margin-top: 18px; }
+
+/* 内部页标题（固定在上方）与内容区 */
+.page-title { font-size: 32px; font-weight: 600; margin: 0 0 24px; color: #111; }
+.page-content { flex: 1; min-height: 0; font-size: 20px; line-height: 1.7; }
+
+/* 章节分页头：标题每页一致，右侧标注章节内页码 k / n */
+.chapter-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-bottom: 1px solid #e2e2e2; padding-bottom: 10px; margin-bottom: 20px;
+}
+.chapter-header .chapter-title { font-size: 28px; font-weight: 600; color: #111; }
+.chapter-header .chapter-page { font-size: 14px; color: #888; }
+
+/* 通用表格 */
+table { border-collapse: collapse; width: 100%; font-size: 16px; }
+th, td { padding: 8px 12px; border-bottom: 1px solid #e2e2e2; text-align: left; vertical-align: top; }
+th { font-weight: 600; }
